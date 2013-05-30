@@ -7,7 +7,7 @@ import os
 import atexit
 import struct
 from signal import signal, SIGTERM
-from .packages.core import Package
+from ..packages.core import Package
 from .player import Player
 
 QUEUE_CHECK_TIMEOUT = 0.5

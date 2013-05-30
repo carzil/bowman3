@@ -1,4 +1,4 @@
-from bowman3.server.packages.auth_packages import HanshakePackage
+from bowman3.packages.auth_packages import HanshakePackage
 import socket
 
 p = HanshakePackage()
