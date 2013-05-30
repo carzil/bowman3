@@ -1,7 +1,7 @@
 import struct
 
 class Package:
-    def dump(self, socket):
-        socket.send(struct.pack(">H", self.PACKAGE_ID))
+    def dump(self, stream):
+        stream.write_short(self.PACKAGE_ID)
         if hasattr(self, "_dump"):
-            self._dump(socket)
+            self._dump(stream)

@@ -1,4 +1,4 @@
-from .loggers import worker_log
+from ..loggers import worker_log
 import socket
 import threading
 import time
@@ -34,7 +34,7 @@ class Worker():
 
         self._register_packages()
 
-        atexit.register(self._stop)
+        atexit.register(self.stop)
         signal(SIGTERM, self._sigterm_handler)
         worker_log.info("worker initialization passed successfully")
 
@@ -47,7 +47,7 @@ class Worker():
         worker_log.info("register %d packages", cnt)
 
     def _sigterm_handler(self, signum, frame):
-        self._stop()
+        self.stop()
         os._exit(0)
 
     def _create_socket(self):
@@ -126,14 +126,14 @@ class Worker():
             worker_log.info("client sent invalid package, ignoring it")
         else:
             try:
-                package = p_type.load(sock)
+                package = p_type.load(p.stream)
             except:
                 worker_log.exception("cannot receive package from client's socket:")
             else:
                 self._package_queue.append((package, p))
                 worker_log.info("added a package from player at %s:%d to queue", p.host, p.port)
 
-    def _stop(self):
+    def stop(self):
         worker_log.info("initiated server stopping")
         self._is_running.clear()
         worker_log.info("waiting for terminating threads")

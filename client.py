@@ -1,8 +1,10 @@
-from bowman3.packages.auth_packages import HanshakePackage
+from bowman3.packages.auth_packages import UsernamePackage
+from bowman3.utils.stream import Stream
 import socket
 
-p = HanshakePackage()
 s = socket.socket()
 s.connect(("localhost", 9889))
-p.dump(s)
+st = Stream(s)
+p = UsernamePackage(input("Your username: "))
+p.dump(st)
 s.close()
