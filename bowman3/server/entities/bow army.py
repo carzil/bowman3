@@ -1,8 +1,14 @@
-class Army():
-    count = 0
-    atack = 0
-    defense = 0
-    health = 0
-    speed = 0
+from .army import Army
+
+class BowArmy(Army):
+    COUNT = 8
+    ATACK = 20
+    DEFENSEL = 10
+    DEFENSEB = 15
+    DEFENSEH = 10
+    HEALTH = [80 for x in range (0, 10)]
+    SPEED = 1
+    RANGE = 8
+    MISSCHANCE = 20
     def __init__(player):
         self.player = player
